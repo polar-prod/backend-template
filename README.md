@@ -4,13 +4,9 @@ Welcome to the Polar Productions backend-template repository!
 
 This project is open-source under the **Apache 2.0 License** for **non-commercial and personal use**.
 
----
-
 ## Commercial / SaaS Usage
 
 For commercial deployment, production hosting, or SaaS usage, a separate **commercial license** or subscription is required. Please contact us to obtain a subscription or commercial license.
-
----
 
 ## License
 
