@@ -1,4 +1,5 @@
 plugins {
+    kotlin("plugin.serialization") version libs.versions.kotlin
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.spring)
     alias(libs.plugins.spring.boot)
@@ -31,8 +32,9 @@ dependencies {
 
     // Payment Provider
 
-    // Firebase
-    implementation(libs.firebase.admin)
+    // Supabase
+    implementation(platform(libs.superbase.bom))
+    implementation(libs.bundles.supabase)
 
     // Test
     testImplementation(libs.spring.boot.starter.test)

@@ -1,6 +1,5 @@
 package org.polar.template.service
 
-import com.google.firebase.auth.FirebaseAuth
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
 import org.springframework.beans.factory.annotation.Value
@@ -14,7 +13,6 @@ class AuthService(
     @Value("\${jwt.secret}") private val jwtSecret: String
 ) {
 
-    private val firebaseAuth = FirebaseAuth.getInstance()
     private val key: Key = Keys.hmacShaKeyFor(jwtSecret.toByteArray())
 
     fun createJwtToken(userId: String, ip: String, userAgent: String): String {
@@ -31,6 +29,4 @@ class AuthService(
 
             .compact()
     }
-
-    fun verifyFirebaseToken(idToken: String) = this.firebaseAuth.verifyIdToken(idToken)
 }

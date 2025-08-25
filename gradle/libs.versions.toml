@@ -3,7 +3,7 @@ kotlin = "1.9.25"
 spring-boot = "3.5.5"
 spring-dependency-management = "1.1.7"
 jjwt = "0.13.0"
-firebase-admin = "9.5.0"
+superbase = "3.2.2"
 
 [libraries]
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
@@ -19,8 +19,8 @@ jjwt-api = { module = "io.jsonwebtoken:jjwt-api", version.ref = "jjwt" }
 jjwt-impl = { module = "io.jsonwebtoken:jjwt-impl", version.ref = "jjwt" }
 jjwt-jackson = { module = "io.jsonwebtoken:jjwt-jackson", version.ref = "jjwt" }
 
-firebase-admin = { module = "com.google.firebase:firebase-admin", version.ref = "firebase-admin" }
-
+superbase-bom = { group = "io.github.jan-tennert.supabase", name = "bom", version.ref = "superbase" }
+superbase-auth = { module = "io.github.jan-tennert.supabase:auth-kt" }
 
 
 spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
@@ -34,3 +34,6 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
 spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
 spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "spring-dependency-management" }
+
+[bundles]
+supabase = ["superbase-auth"]
