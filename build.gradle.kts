@@ -35,6 +35,7 @@ dependencies {
     // Supabase
     implementation(platform(libs.superbase.bom))
     implementation(libs.bundles.supabase)
+    implementation(libs.ktor)
 
     // Test
     testImplementation(libs.spring.boot.starter.test)
