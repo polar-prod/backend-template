@@ -37,6 +37,8 @@ dependencies {
     implementation(libs.bundles.supabase)
     implementation(libs.ktor)
 
+    //TODO add log4j2
+
     // Test
     testImplementation(libs.spring.boot.starter.test)
     testImplementation(libs.kotlin.test.junit5)
