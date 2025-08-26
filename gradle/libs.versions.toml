@@ -1,0 +1,41 @@
+[versions]
+kotlin = "1.9.25"
+spring-boot = "3.5.5"
+spring-dependency-management = "1.1.7"
+jjwt = "0.13.0"
+superbase = "3.2.2"
+ktor = "3.2.3"
+
+[libraries]
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
+jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin" }
+
+spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
+spring-boot-starter-security = { module = "org.springframework.boot:spring-boot-starter-security" }
+spring-boot-starter-oauth2-client = { module = "org.springframework.boot:spring-boot-starter-oauth2-client" }
+spring-boot-starter-validation = { module = "org.springframework.boot:spring-boot-starter-validation" }
+spring-boot-starter-graphql = { module = "org.springframework.boot:spring-boot-starter-graphql" }
+
+jjwt-api = { module = "io.jsonwebtoken:jjwt-api", version.ref = "jjwt" }
+jjwt-impl = { module = "io.jsonwebtoken:jjwt-impl", version.ref = "jjwt" }
+jjwt-jackson = { module = "io.jsonwebtoken:jjwt-jackson", version.ref = "jjwt" }
+
+superbase-bom = { group = "io.github.jan-tennert.supabase", name = "bom", version.ref = "superbase" }
+superbase-auth = { module = "io.github.jan-tennert.supabase:auth-kt" }
+
+ktor = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
+
+spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
+kotlin-test-junit5 = { module = "org.jetbrains.kotlin:kotlin-test-junit5" }
+spring-graphql-test = { module = "org.springframework.graphql:spring-graphql-test" }
+spring-security-test = { module = "org.springframework.security:spring-security-test" }
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
+spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
+spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "spring-dependency-management" }
+
+[bundles]
+supabase = ["superbase-auth"]
