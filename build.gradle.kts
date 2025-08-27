@@ -25,11 +25,6 @@ dependencies {
     implementation(libs.kotlin.reflect)
     implementation(libs.jackson.module.kotlin)
 
-    // JWT
-    implementation(libs.jjwt.api)
-    runtimeOnly(libs.jjwt.impl)
-    runtimeOnly(libs.jjwt.jackson)
-
     // Payment Provider
 
     // Supabase
