@@ -1,7 +1,7 @@
 package org.polar.template.controller
 
-import kotlinx.coroutines.runBlocking
 import org.polar.template.service.AuthService
+import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -14,23 +14,20 @@ class AuthController(
 ) {
 
     @GetMapping("/google")
-    fun getGoogleUrl(@RequestParam redirect: String): String {
-        return runBlocking {
-            authService.googleAuthUrl(redirect)
-        }
+    suspend fun getGoogleUrl(@RequestParam redirect: String): ResponseEntity<String> {
+        val url = authService.googleAuthUrl(redirect)
+        return ResponseEntity.ok(url)
     }
 
     @GetMapping("/github")
-    fun getGithubUrl(@RequestParam redirect: String): String {
-        return runBlocking {
-            authService.gitHubAuthUrl(redirect)
-        }
+    suspend fun getGithubUrl(@RequestParam redirect: String): ResponseEntity<String> {
+        val url = authService.gitHubAuthUrl(redirect)
+        return ResponseEntity.ok(url)
     }
 
-    @GetMapping("/github")
-    fun getAppleUrl(@RequestParam redirect: String): String {
-        return runBlocking {
-            authService.appleAuthUrl(redirect)
-        }
+    @GetMapping("/apple")
+    suspend fun getAppleUrl(@RequestParam redirect: String): ResponseEntity<String> {
+        val url = authService.appleAuthUrl(redirect)
+        return ResponseEntity.ok(url)
     }
 }
