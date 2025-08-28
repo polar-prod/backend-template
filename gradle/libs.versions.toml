@@ -1,6 +1,6 @@
 [versions]
-kotlin = "1.9.25"
-spring-boot = "3.5.5"
+kotlin = "2.2.0"
+spring-boot = "4.0.0-SNAPSHOT"
 spring-dependency-management = "1.1.7"
 superbase = "3.2.2"
 ktor = "3.2.3"
@@ -26,6 +26,7 @@ spring-security-test = { module = "org.springframework.security:spring-security-
 junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
 
 [plugins]
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
 spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }

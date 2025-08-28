@@ -1,5 +1,5 @@
 plugins {
-    kotlin("plugin.serialization") version libs.versions.kotlin
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.spring)
     alias(libs.plugins.spring.boot)
@@ -8,10 +8,16 @@ plugins {
 
 group = "org.polar"
 version = "1.0.0-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_21
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
 
 repositories {
     mavenCentral()
+    maven { url = uri("https://repo.spring.io/snapshot") }
 }
 
 dependencies {
@@ -44,9 +50,10 @@ dependencies {
 
 kotlin {
     compilerOptions {
-        freeCompilerArgs.addAll("-Xjsr305=strict")
+        freeCompilerArgs.addAll("-Xjsr305=strict", "-Xannotation-default-target=param-property")
     }
 }
+
 
 tasks.withType<Test> {
     useJUnitPlatform()
