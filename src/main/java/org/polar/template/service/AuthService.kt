@@ -16,7 +16,6 @@ class AuthService(private val supabaseClient: SupabaseClient) {
             this.email = email
             this.password = password
         }
-
         return result?.id
     }
 
@@ -25,8 +24,7 @@ class AuthService(private val supabaseClient: SupabaseClient) {
             this.email = email
             this.password = password
         }
-
-        return this.supabaseClient.auth.currentAccessTokenOrNull()
+        return supabaseClient.auth.currentAccessTokenOrNull()
     }
 
     suspend fun googleAuthUrl(redirectUrl: String): String {
@@ -42,7 +40,7 @@ class AuthService(private val supabaseClient: SupabaseClient) {
     }
 
     suspend fun importSessionFromFrontend(jwt: String) {
-        supabaseClient.auth.importAuthToken(jwt, retrieveUser = true)
+        this.supabaseClient.auth.importAuthToken(jwt, retrieveUser = true)
     }
 
 }

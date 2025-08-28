@@ -1,8 +1,10 @@
 package org.polar.template.controller
 
-import kotlinx.coroutines.runBlocking
+import org.polar.template.model.UserResponse
 import org.polar.template.service.AuthService
 import org.polar.template.service.UserService
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestHeader
@@ -16,14 +18,24 @@ class UserController(
 ) {
 
     @GetMapping("/@me")
-    fun getUserFromToken(@RequestHeader("Authorization") authHeader: String): String? {
+    suspend fun getUserFromToken(@RequestHeader("Authorization") authHeader: String): ResponseEntity<UserResponse> {
+        if (authHeader.isBlank() || !authHeader.startsWith("Bearer ")) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build()
+        }
+
         val token = authHeader.removePrefix("Bearer ").trim()
 
-        return runBlocking {
-            authService.importSessionFromFrontend(token)
+        return try {
+            this.authService.importSessionFromFrontend(token)
 
-            val user = userService.currentUser()
-            user?.email
+            val user = this.userService.currentUser()
+            if (user == null) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build()
+            }
+
+            return ResponseEntity.ok(UserResponse(email = user.email))
+        } catch (ex: Exception) {
+            ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build()
         }
     }
 
