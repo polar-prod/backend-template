@@ -29,6 +29,7 @@ dependencies {
 
     // Kotlin support
     implementation(libs.kotlin.reflect)
+    implementation(libs.kotlin.coroutines)
     implementation(libs.jackson.module.kotlin)
 
     // Payment Provider
