@@ -1,4 +1,4 @@
-# backend-template | Polar Productions
+# backend-template — Polar Productions
 
 Welcome to the Polar Productions backend-template repository!  
 
