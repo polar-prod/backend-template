@@ -1,13 +1,14 @@
 package org.polar.template.controller
 
+import jakarta.servlet.http.HttpServletRequest
 import org.polar.template.model.UserResponse
 import org.polar.template.service.AuthService
 import org.polar.template.service.UserService
+import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
 
 @Controller
@@ -17,13 +18,28 @@ class UserController(
     private val userService: UserService
 ) {
 
+    private val logger = LoggerFactory.getLogger(UserController::class.java)
+
     @GetMapping("/@me")
-    suspend fun getUserFromToken(@RequestHeader("Authorization") authHeader: String): ResponseEntity<UserResponse> {
-        if (authHeader.isBlank() || !authHeader.startsWith("Bearer ")) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build()
+    suspend fun getUserFromToken(request: HttpServletRequest): ResponseEntity<UserResponse> {
+
+        if (request.cookies == null || request.cookies.isEmpty()) {
+            logger.warn("Keine Cookies im Request gefunden.")
+        } else {
+            logger.info("Cookies im Request:") //TODO wird nicht geloggt idk sehr weird du hs
+            request.cookies.forEach {
+                logger.info("Cookie: ${it.name} = ${it.value}")
+            }
         }
 
-        val token = authHeader.removePrefix("Bearer ").trim()
+        val cookieName = "JSESSIONID"
+        val token = request.cookies
+            ?.firstOrNull { it.name == cookieName }
+            ?.value
+
+        if (token.isNullOrBlank()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build()
+        }
 
         return try {
             this.authService.importSessionFromFrontend(token)

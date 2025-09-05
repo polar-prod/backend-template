@@ -1,11 +1,7 @@
 type Query {
-  verifyToken(idToken: String!): User!
+  me: UserResponse
 }
 
-
-type User {
-  id: ID!
-  email: String!
-  role: String!
-  jwt: String!
+type UserResponse {
+  email: String
 }
